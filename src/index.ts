@@ -2,7 +2,8 @@ import { print } from 'graphql/language/printer'
 
 import createRequestBody from './createRequestBody'
 import { ClientError, GraphQLError, RequestDocument, Variables } from './types'
-import { Headers, RequestInit, Response } from './types.dom'
+import { Headers } from 'cross-fetch'
+import { Headers as HeadersType, RequestInit, Response } from './types.dom'
 import fetch from './fetch'
 
 export { ClientError } from './types'
@@ -37,7 +38,7 @@ export class GraphQLClient {
   async rawRequest<T = any, V = Variables>(
     query: string,
     variables?: V
-  ): Promise<{ data?: T; extensions?: any; headers: Headers; status: number; errors?: GraphQLError[] }> {
+  ): Promise<{ data?: T; extensions?: any; headers: HeadersType; status: number; errors?: GraphQLError[] }> {
     const { headers, ...others } = this.options
     const oHeaders = transformHeaders(headers)
     const body = createRequestBody(query, variables)
@@ -123,7 +124,7 @@ export async function rawRequest<T = any, V = Variables>(
   url: string,
   query: string,
   variables?: V
-): Promise<{ data?: T; extensions?: any; headers: Headers; status: number; errors?: GraphQLError[] }> {
+): Promise<{ data?: T; extensions?: any; headers: HeadersType; status: number; errors?: GraphQLError[] }> {
   const client = new GraphQLClient(url)
   return client.rawRequest<T, V>(query, variables)
 }
