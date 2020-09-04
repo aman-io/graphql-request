@@ -65,13 +65,14 @@ exports.gql = exports.request = exports.rawRequest = exports.GraphQLClient = voi
 var printer_1 = require("graphql/language/printer");
 var createRequestBody_1 = __importDefault(require("./createRequestBody"));
 var types_1 = require("./types");
+var cross_fetch_1 = require("cross-fetch");
 var fetch_1 = __importDefault(require("./fetch"));
 var types_2 = require("./types");
 Object.defineProperty(exports, "ClientError", { enumerable: true, get: function () { return types_2.ClientError; } });
 var transformHeaders = function (headers) {
     var oHeaders = {};
     if (headers) {
-        if (headers instanceof Headers) {
+        if (headers instanceof cross_fetch_1.Headers) {
             headers.forEach(function (v, k) { oHeaders[k] = v; });
         }
         else if (headers instanceof Array) {

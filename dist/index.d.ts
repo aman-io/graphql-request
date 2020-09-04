@@ -1,5 +1,5 @@
 import { GraphQLError, RequestDocument, Variables } from './types';
-import { Headers, RequestInit } from './types.dom';
+import { Headers as HeadersType, RequestInit } from './types.dom';
 export { ClientError } from './types';
 /**
  * todo
@@ -11,7 +11,7 @@ export declare class GraphQLClient {
     rawRequest<T = any, V = Variables>(query: string, variables?: V): Promise<{
         data?: T;
         extensions?: any;
-        headers: Headers;
+        headers: HeadersType;
         status: number;
         errors?: GraphQLError[];
     }>;
@@ -28,7 +28,7 @@ export declare class GraphQLClient {
 export declare function rawRequest<T = any, V = Variables>(url: string, query: string, variables?: V): Promise<{
     data?: T;
     extensions?: any;
-    headers: Headers;
+    headers: HeadersType;
     status: number;
     errors?: GraphQLError[];
 }>;
