@@ -2,26 +2,12 @@ import { print } from 'graphql/language/printer'
 
 import createRequestBody from './createRequestBody'
 import { ClientError, GraphQLError, RequestDocument, Variables } from './types'
-import { Headers } from 'cross-fetch'
 import { Headers as HeadersType, RequestInit, Response } from './types.dom'
-import fetch from './fetch'
+import fetch, { transformHeaders } from './fetch'
 
 export { ClientError } from './types'
 
-const transformHeaders = (headers: RequestInit["headers"]): Record<string, string> => {
-  let oHeaders: Record<string, string> = {};
-  if (headers) {
-    if (headers instanceof Headers) {
-      headers.forEach((v, k) => { oHeaders[k] = v })
-    } else if (headers instanceof Array) {
-      headers.forEach(([k, v]) => { oHeaders[k] = v })
-    } else {
-      oHeaders = headers as Record<string, string>
-    }
-  }
 
-  return oHeaders
-};
 
 /**
  * todo

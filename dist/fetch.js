@@ -1,9 +1,44 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var cross_fetch_1 = __importDefault(require("cross-fetch"));
+exports.transformHeaders = void 0;
+var cross_fetch_1 = __importStar(require("cross-fetch"));
+exports.transformHeaders = function (headers) {
+    var oHeaders = {};
+    if (headers) {
+        if (headers instanceof cross_fetch_1.Headers) {
+            headers.forEach(function (v, k) { oHeaders[k] = v; });
+        }
+        else if (headers instanceof Array) {
+            headers.forEach(function (_a) {
+                var k = _a[0], v = _a[1];
+                oHeaders[k] = v;
+            });
+        }
+        else {
+            oHeaders = headers;
+        }
+    }
+    return oHeaders;
+};
 var fetch;
 //@ts-ignore
 if (wx) {
@@ -23,7 +58,7 @@ if (wx) {
                         ok: statusCode >= 200 && statusCode < 300,
                         status: statusCode,
                         statusText: errMsg,
-                        headers: header,
+                        headers: exports.transformHeaders(header),
                         text: function () { return Promise.resolve(data); }
                     });
                 }

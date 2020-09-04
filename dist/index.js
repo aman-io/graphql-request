@@ -10,6 +10,25 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -65,28 +84,9 @@ exports.gql = exports.request = exports.rawRequest = exports.GraphQLClient = voi
 var printer_1 = require("graphql/language/printer");
 var createRequestBody_1 = __importDefault(require("./createRequestBody"));
 var types_1 = require("./types");
-var cross_fetch_1 = require("cross-fetch");
-var fetch_1 = __importDefault(require("./fetch"));
+var fetch_1 = __importStar(require("./fetch"));
 var types_2 = require("./types");
 Object.defineProperty(exports, "ClientError", { enumerable: true, get: function () { return types_2.ClientError; } });
-var transformHeaders = function (headers) {
-    var oHeaders = {};
-    if (headers) {
-        if (headers instanceof cross_fetch_1.Headers) {
-            headers.forEach(function (v, k) { oHeaders[k] = v; });
-        }
-        else if (headers instanceof Array) {
-            headers.forEach(function (_a) {
-                var k = _a[0], v = _a[1];
-                oHeaders[k] = v;
-            });
-        }
-        else {
-            oHeaders = headers;
-        }
-    }
-    return oHeaders;
-};
 /**
  * todo
  */
@@ -102,7 +102,7 @@ var GraphQLClient = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         _a = this.options, headers = _a.headers, others = __rest(_a, ["headers"]);
-                        oHeaders = transformHeaders(headers);
+                        oHeaders = fetch_1.transformHeaders(headers);
                         body = createRequestBody_1.default(query, variables);
                         return [4 /*yield*/, fetch_1.default(this.url, __assign({ method: 'POST', headers: __assign(__assign({}, (typeof body === 'string' ? { 'Content-Type': 'application/json' } : {})), oHeaders), body: body }, others))];
                     case 1:
@@ -133,7 +133,7 @@ var GraphQLClient = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         _a = this.options, headers = _a.headers, others = __rest(_a, ["headers"]);
-                        oHeaders = transformHeaders(headers);
+                        oHeaders = fetch_1.transformHeaders(headers);
                         resolvedDoc = resolveRequestDocument(document);
                         body = createRequestBody_1.default(resolvedDoc, variables);
                         return [4 /*yield*/, fetch_1.default(this.url, __assign({ method: 'POST', headers: __assign(__assign({}, (typeof body === 'string' ? { 'Content-Type': 'application/json' } : {})), oHeaders), body: body }, others))];

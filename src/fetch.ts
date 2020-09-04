@@ -1,4 +1,19 @@
-import crossFetch from 'cross-fetch'
+import crossFetch, { Headers } from 'cross-fetch'
+
+export const transformHeaders = (headers: RequestInit["headers"]): Record<string, string> => {
+  let oHeaders: Record<string, string> = {};
+  if (headers) {
+    if (headers instanceof Headers) {
+      headers.forEach((v, k) => { oHeaders[k] = v })
+    } else if (headers instanceof Array) {
+      headers.forEach(([k, v]) => { oHeaders[k] = v })
+    } else {
+      oHeaders = headers as Record<string, string>
+    }
+  }
+
+  return oHeaders
+};
 
 let fetch
 //@ts-ignore
@@ -17,7 +32,7 @@ if (wx) {
             ok: statusCode >= 200 && statusCode < 300,
             status: statusCode,
             statusText: errMsg,
-            headers: header,
+            headers: transformHeaders(header),
             text: () => Promise.resolve(data)
           })
         }
