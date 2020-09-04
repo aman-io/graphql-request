@@ -1,9 +1,11 @@
 import crossFetch from 'cross-fetch'
 
 let fetch
+//@ts-ignore
 if (wx) {
   fetch = (url, { method, body, headers }) => {
     return new Promise(resolve => {
+      //@ts-ignore
       wx.request({
         url,
         method,

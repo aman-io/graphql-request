@@ -62,10 +62,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.gql = exports.request = exports.rawRequest = exports.GraphQLClient = void 0;
-var fetch_1 = __importDefault(require("./fetch"));
 var printer_1 = require("graphql/language/printer");
 var createRequestBody_1 = __importDefault(require("./createRequestBody"));
 var types_1 = require("./types");
+var fetch_1 = __importDefault(require("./fetch"));
 var types_2 = require("./types");
 Object.defineProperty(exports, "ClientError", { enumerable: true, get: function () { return types_2.ClientError; } });
 var transformHeaders = function (headers) {

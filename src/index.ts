@@ -1,9 +1,9 @@
-import fetch from './fetch'
 import { print } from 'graphql/language/printer'
 
 import createRequestBody from './createRequestBody'
 import { ClientError, GraphQLError, RequestDocument, Variables } from './types'
 import { Headers, RequestInit, Response } from './types.dom'
+import fetch from './fetch'
 
 export { ClientError } from './types'
 
