@@ -1,10 +1,11 @@
 {
-  "name": "graphql-request",
-  "version": "0.0.0-dripip",
+  "name": "@aman/graphql-request",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "files": [
     "dist"
   ],
+  "scope": "aman",
   "bundlesize": [
     {
       "path": "./dist/index.js",
