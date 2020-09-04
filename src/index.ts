@@ -1,4 +1,4 @@
-import fetch from 'cross-fetch'
+import fetch from './fetch'
 import { print } from 'graphql/language/printer'
 
 import createRequestBody from './createRequestBody'
