@@ -1,9 +1,10 @@
 import { print } from 'graphql/language/printer'
 
 import createRequestBody from './createRequestBody'
+import transformHeaders from './transformHeaders'
 import { ClientError, GraphQLError, RequestDocument, Variables } from './types'
 import { Headers as HeadersType, RequestInit, Response } from './types.dom'
-import fetch, { transformHeaders } from './fetch'
+import fetch from './fetch'
 
 export { ClientError } from './types'
 
@@ -164,7 +165,7 @@ export default request
  * todo
  */
 function getResult(response: Response): Promise<any> {
-  const contentType = response.headers.get('Content-Type')
+  const contentType = response.headers['Content-Type']
   if (contentType && contentType.startsWith('application/json')) {
     return response.json()
   } else {

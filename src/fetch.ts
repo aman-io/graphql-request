@@ -1,19 +1,5 @@
-import crossFetch, { Headers } from 'cross-fetch'
-
-export const transformHeaders = (headers: RequestInit["headers"]): Record<string, string> => {
-  let oHeaders: Record<string, string> = {};
-  if (headers) {
-    if (headers instanceof Headers) {
-      headers.forEach((v, k) => { oHeaders[k] = v })
-    } else if (headers instanceof Array) {
-      headers.forEach(([k, v]) => { oHeaders[k] = v })
-    } else {
-      oHeaders = headers as Record<string, string>
-    }
-  }
-
-  return oHeaders
-};
+import crossFetch from 'cross-fetch'
+import transformHeaders from './transformHeaders'
 
 let fetch
 //@ts-ignore
