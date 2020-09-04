@@ -31,6 +31,8 @@ if (wx) {
         });
     };
 }
-fetch = cross_fetch_1.default;
+else {
+    fetch = cross_fetch_1.default;
+}
 exports.default = fetch;
 //# sourceMappingURL=fetch.js.map

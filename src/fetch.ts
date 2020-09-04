@@ -24,7 +24,8 @@ if (wx) {
       })
     })
   }
+} else {
+  fetch = crossFetch
 }
-fetch = crossFetch
 
 export default fetch
